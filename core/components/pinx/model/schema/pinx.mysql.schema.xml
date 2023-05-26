@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="PinX" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="PinX" version="1.1">
+
+    <object class="PinXLists" table="pinx_lists" extends="xPDOSimpleObject">
+        <field key="title" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="owner_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="owner_id" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="description" dbtype="text" phptype="string" null="true" default="" />
+        <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <composite alias="Image" class="PinXImages" local="id" foreign="list" cardinality="many" owner="local" />
+    </object>
+
+    <object class="PinXImages" table="pinx_images" extends="xPDOSimpleObject">
+        <field key="image" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="list" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <aggregate alias="List" class="PinXLists" local="list" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    
+</model>

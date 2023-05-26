@@ -1,0 +1,6 @@
+Changelog for PinX.
+
+
+PinX 1.0.1 rc1
+==============
+- Initial release.
