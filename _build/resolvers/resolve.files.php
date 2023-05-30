@@ -19,7 +19,7 @@
 /**
  * Resolve files. Mostly for removing files that get removed from the package.
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 if ($object->xpdo) {
@@ -29,6 +29,18 @@ if ($object->xpdo) {
             $removedFiles = [
                 'components/pinx/controllers/mgr/header.php',
                 'components/pinx/controllers/mgr/set.php',
+                'components/pinx/processors/mgr/item/create.php',
+                'components/pinx/processors/mgr/item/getlist.php',
+                'components/pinx/processors/mgr/item/publish.php',
+                'components/pinx/processors/mgr/item/remove.php',
+                'components/pinx/processors/mgr/item/sort.php',
+                'components/pinx/processors/mgr/item/unpublish.php',
+                'components/pinx/processors/mgr/item/update.php',
+                'components/pinx/processors/mgr/set/getlist.php',
+                'components/pinx/processors/mgr/set/publish.php',
+                'components/pinx/processors/mgr/set/remove.php',
+                'components/pinx/processors/mgr/set/sort.php',
+                'components/pinx/processors/mgr/set/unpublish.php',
             ];
 
             foreach ($removedFiles as $file) {

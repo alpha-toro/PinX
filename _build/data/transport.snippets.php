@@ -18,7 +18,7 @@
 /**
  * Add snippets to build
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 $snippets   = array();
@@ -26,10 +26,20 @@ $snippets[0]= $modx->newObject('modSnippet');
 $snippets[0]->fromArray(array(
     'id'          => 0,
     'name'        => 'PinX',
-    'description' => 'Displays Events.',
-    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxsubmission.php'),
+    'description' => 'Displays Galleries.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinx.php'),
 ), '', true, true);
+$properties = include $sources['build'].'properties/properties.pinx.php';
+$snippets[0]->setProperties($properties);
 unset($properties);
 
+$snippets[1]= $modx->newObject('modSnippet');
+$snippets[1]->fromArray(array(
+    'id'          => 1,
+    'name'        => 'PinXLists',
+    'description' => 'Displays Lists.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxsets.php'),
+), '', true, true);
+unset($properties);
 
 return $snippets;

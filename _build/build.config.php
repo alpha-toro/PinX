@@ -18,7 +18,7 @@
 /**
  * Define the MODX path constants necessary for installation
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 

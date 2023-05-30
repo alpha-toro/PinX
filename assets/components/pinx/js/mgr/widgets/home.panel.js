@@ -16,9 +16,15 @@ PinX.panel.Home = function(config) {
             ,hideMode: 'offsets'
             ,items: [
                 {
+                    // title: _('pinx.sets')
                     items: [
+                        // {
+                        //     html: '<p>'+_('pinx.set_intro_msg')+'</p>'
+                        //     ,border: false
+                        //     ,bodyCssClass: 'panel-desc'
+                        // }
                         {
-                            xtype: 'pinx-grid-lists'
+                            xtype: 'pinx-grid-sets'
                             ,preventRender: true
                             ,cls: 'main-wrapper'
                         }

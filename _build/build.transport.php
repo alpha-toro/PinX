@@ -2,23 +2,23 @@
 /**
  * PinX
  *
- * PinX is free software; you can redistribute it and/or modify it under the
+ * pinx is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  *
- * PinX is distributed in the hope that it will be useful, but WITHOUT ANY
+ * pinx is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * PinX; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * pinx; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * PinX build script
+ * pinx build script
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 $mtime  = microtime();
@@ -146,6 +146,23 @@ $vehicle->resolve('file', array(
 ));
 $builder->putVehicle($vehicle);
 
+/* load system settings */
+$settings = include $sources['data'] . 'transport.settings.php';
+if (!is_array($settings)) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in settings.');
+} else {
+    $attributes = array(
+        xPDOTransport::UNIQUE_KEY    => 'key',
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => false,
+    );
+    foreach ($settings as $setting) {
+        $vehicle = $builder->createVehicle($setting, $attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' System Settings.');
+}
+unset($settings, $setting, $attributes);
 
 // Load menu
 $menu = include $sources['data'] . 'transport.menu.php';
@@ -161,6 +178,9 @@ if (empty($menu)) {
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in PHP resolvers...');
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
+    ));
+    $vehicle->resolve('php', array(
+        'source' => $sources['resolvers'] . 'resolve.settings.php',
     ));
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',

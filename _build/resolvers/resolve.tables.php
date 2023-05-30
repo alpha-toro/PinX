@@ -19,7 +19,7 @@
 /**
  * Resolve creating db tables
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 if ($object->xpdo) {
@@ -28,12 +28,13 @@ if ($object->xpdo) {
             /** @var modX $modx */
             $modx      =& $object->xpdo;
             $modelPath = $modx->getOption('pinx.core_path',null,$modx->getOption('core_path').'components/pinx/').'model/';
-            $modx->addPackage('PinX',$modelPath);
+            $modx->addPackage('pinx',$modelPath);
 
             /** @var xPDOManager $manager */
             $manager = $modx->getManager();
 
-            $manager->createObjectContainer('PinXLists');
+            $manager->createObjectContainer('PinXItem');
+            $manager->createObjectContainer('PinXSet');
 
             break;
         case xPDOTransport::ACTION_UPGRADE:

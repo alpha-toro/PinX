@@ -15,10 +15,10 @@
  * PinX; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package PinX
+ * @package pinx
  */
 /**
- * @package PinX
+ * @package pinx
  */
 require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
 /**
@@ -26,7 +26,7 @@ require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
  *
  * {@inheritdoc}
  *
- * @package PinX
+ * @package pinx
  * @extends modRequest
  */
 class PinXControllerRequest extends modRequest {

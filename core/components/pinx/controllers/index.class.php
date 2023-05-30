@@ -16,7 +16,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * @package PinX
+ * @package pinx
  * @subpackage controllers
  */
 require_once dirname(dirname(__FILE__)).'/model/pinx/pinx.class.php';
@@ -53,7 +53,7 @@ class PinXIndexManagerController extends \modExtraManagerController {
     }
 
     public function loadCustomCssJs() {
-        //$this->addJavascript($this->pinx->config['jsUrl'] . 'mgr/widgets/event.grid.js');
+        $this->addJavascript($this->pinx->config['jsUrl'] . 'mgr/widgets/sets.grid.js');
         $this->addJavascript($this->pinx->config['jsUrl'] . 'mgr/widgets/home.panel.js');
         $this->addLastJavascript($this->pinx->config['jsUrl'] . 'mgr/sections/home.js');
         $this->addHtml('<script>Ext.onReady(function() { MODx.load({xtype: "pinx-page-home"}) })</script>');

@@ -17,7 +17,7 @@
 /**
  * Build Schema script
  *
- * @package PinX
+ * @package pinx
  * @subpackage build
  */
 $mtime  = microtime();
@@ -53,7 +53,6 @@ $modx->setLogTarget('ECHO');
 
 $manager   = $modx->getManager();
 $generator = $manager->getGenerator();
-
 $generator->parseSchema($sources['model'] . 'schema/'.PKG_NAME_LOWER.'.mysql.schema.xml', $sources['model']);
 
 $mtime     = microtime();
