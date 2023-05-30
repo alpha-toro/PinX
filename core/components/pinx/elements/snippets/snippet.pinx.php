@@ -3,6 +3,9 @@
  * The base PinX snippet.
  *
  * @package pinx
+ * 
+ * USAGE: [[PinX? &listid=`1`]]
+ * 
  */
 
 $PinX = $modx->getService(
@@ -13,8 +16,7 @@ $PinX = $modx->getService(
 );
 if (!($PinX instanceof PinX)) return 'No PinX Service';
 
-$set                = $modx->getOption('set', $scriptProperties, null);
-$sets               = $modx->getOption('sets', $scriptProperties, null);
+$set                = $modx->getOption('listid', $scriptProperties, null);
 $tpl                = $modx->getOption('tpl', $scriptProperties, 'pinx-item-tpl');
 $setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
 $sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
@@ -24,23 +26,32 @@ $limitImages        = $modx->getOption('limitImages', $scriptProperties, null);
 $showUnpublished    = $modx->getOption('showUnpublished', $scriptProperties, false);
 $showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
 $outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
-$setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
+$setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "</div>");
 
-/* build query */
+$user = $modx->getUser();
+if(!$user->get('id')){
+    return 'No User ID Set';
+} else {
+    $userid = $user->get('id');
+}
+
+
+/* build query for lists */
 $c = $modx->newQuery('PinXSet');
 
 if (!empty($set)) {
     $c->where(array(
         'id' => $set,
+        'userid' => $userid,
     ));
-} else if (!empty($sets)) {
-    $c->where(array(
-        'id:IN' => explode(',', $sets),
-    ));
-    $c->sortby('id','ASC');
 } else {
-    $c->sortby('id','ASC');
+    $c->where(array(
+        'userid' => $userid,
+    ));
 }
+
+$c->sortby($sortBy,$sortDir);
+
 if (!$showUnpublished) {
     $c->where(array(
         'published' => true
@@ -48,10 +59,10 @@ if (!$showUnpublished) {
 }
 if (!empty($limit)) $c->limit($limit);
 
-// Get collection of FAQ sets based on query
+// Get collection 
 $sets = $modx->getCollection('PinXSet', $c);
 
-// Loop through found FAQ sets and build the output
+// Loop through found lists and build the output
 $list = array();
 foreach ($sets as $set) {
     // Empty array to hold output from current set
@@ -80,7 +91,7 @@ foreach ($sets as $set) {
         $setHeading = $PinX->getChunk($setTpl, $setArray);
     }
 
-    // Collect output from this FAQ set.
+    // Collect output
     if (isset($setHeading)) {
         $list[] = $setHeading . "\n" . implode($outputSeparator, $setList);
     } else {
@@ -90,10 +101,9 @@ foreach ($sets as $set) {
 }
 
 // Build output
-$output        = implode($setOutputSeparator, $list);
+$output = implode($setOutputSeparator, $list);
 $toPlaceholder = $modx->getOption('toPlaceholder', $scriptProperties, false);
 if (!empty($toPlaceholder)) {
-    // If using a placeholder, output nothing and set output to specified placeholder
     $modx->setPlaceholder($toPlaceholder, $output);
     return '';
 }

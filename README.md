@@ -4,9 +4,9 @@
 
 ## Templates
 
-The templates are divided into two parts, the set heading (setTpl) and the questions/answers (tpl).
+The templates are divided into two parts, the list heading and the images.
 
-### setTpl
+### pinx-set-tpl
 To add headings to each lists, you will want to define this template. The *variables* available in this template are:
 
 - [[+id]]
@@ -21,7 +21,7 @@ The default template for this looks like this.
         <div>[[+description]]</div>
     </h2>
 
-### Tpl
+### pinx-item-tpl
 The image template includes these *variables*
 
 - [[+id]]
@@ -38,21 +38,23 @@ The default template for this section looks like this
 </div>
 ```
 
+![screenshot](frontend.png)    
+
+---
+
 ## Snippet call
 
-To output your Sets, just place following snippet call in desired location:
+To output your Users Sets, just place following snippet call in desired location:
 
-    [[PinX]]
+**You will need to pair this with the Login Extra**
+
+    [[PinX? &userid=`1`]]
 
 *Calling it like this will output all sets and their images.*
 
 A more specific call would be like this:
 
-    [[PinX?
-      &set=`3`
-      &tpl=`tpl`
-      &setTpl=`setTpl`
-    ]]
+    [[PinX? &userid=`1` &listid=`1`]]
 
 ## Options
 
@@ -60,7 +62,7 @@ There are more options available to modify the call to your needs:
 
 ---
 
-**set**                 ID-value of list to display (if this is not specified ALL images will be displayed)
+**listid**                 ID-value of list to display (if this is not specified ALL images will be displayed)
 
 **tpl**                 Name of the chunk to display your images
 
@@ -77,7 +79,8 @@ There are more options available to modify the call to your needs:
 A more complex call would look like this:
 
     [[PinX?
-      &set=`1`
+      &userid=`1`
+      &listid=`1`
       &tpl=`pinx-img-tpl`
       &sortBy=`rank`
       &sortDir=`ASC`
@@ -88,3 +91,4 @@ A more complex call would look like this:
 ---
 
 ![screenshot](grid-screenshot.png)    
+

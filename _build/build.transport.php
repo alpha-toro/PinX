@@ -30,7 +30,7 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','PinX');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.0.1');
+define('PKG_VERSION','1.0.2');
 define('PKG_RELEASE','pl');
 
 
@@ -79,6 +79,24 @@ $modx->log(modX::LOG_LEVEL_INFO, 'Created Transport Package and Namespace.');
 $category = $modx->newObject('modCategory');
 $category->set('id', 1);
 $category->set('category', PKG_NAME);
+
+/* create resources */
+$resources = include $sources['data'] . 'transport.resources.php';
+if (!is_array($resources)) {
+    $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in resources.');
+} else {
+    $attributes = array(
+        xPDOTransport::UNIQUE_KEY    => 'key',
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => false,
+    );
+    foreach ($resources as $res) {
+        $vehicle = $builder->createVehicle($res, $attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($resources) . ' Resources.');
+}
+unset($resources, $res, $attributes);
 
 // Add snippets
 $snippets = include $sources['data'] . 'transport.snippets.php';

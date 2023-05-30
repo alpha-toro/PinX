@@ -42,4 +42,40 @@ $chunks[2]->fromArray(array(
     'properties' => NULL
 ),'',true,true);
 
+$chunks[3]= $modx->newObject('modChunk');
+$chunks[3]->fromArray(array(
+    'id' => 3,
+    'name' => 'pinx-form',
+    'description' => 'PinX Submission Form.',
+    'snippet' => file_get_contents($sources['source_core'].'/elements/chunks/pinxform.chunk.tpl'),
+    'properties' => NULL
+),'',true,true);
+
+$chunks[4]= $modx->newObject('modChunk');
+$chunks[4]->fromArray(array(
+    'id' => 4,
+    'name' => 'pinx-form-del',
+    'description' => 'PinX Delete Form.',
+    'snippet' => file_get_contents($sources['source_core'].'/elements/chunks/pinxdelete.chunk.tpl'),
+    'properties' => NULL
+),'',true,true);
+
+$chunks[5]= $modx->newObject('modChunk');
+$chunks[5]->fromArray(array(
+    'id' => 5,
+    'name' => 'pinx-modals',
+    'description' => 'PinX Modals.',
+    'snippet' => file_get_contents($sources['source_core'].'/elements/chunks/pinxmodals.chunk.tpl'),
+    'properties' => NULL
+),'',true,true);
+
+$chunks[6]= $modx->newObject('modChunk');
+$chunks[6]->fromArray(array(
+    'id' => 6,
+    'name' => 'pinx-gallery-item',
+    'description' => 'PinX Gallery Items.',
+    'snippet' => file_get_contents($sources['source_core'].'/elements/chunks/galleryitem.chunk.tpl'),
+    'properties' => NULL
+),'',true,true);
+
 return $chunks;

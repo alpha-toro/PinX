@@ -38,7 +38,43 @@ $snippets[1]->fromArray(array(
     'id'          => 1,
     'name'        => 'PinXLists',
     'description' => 'Displays Lists.',
-    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxsets.php'),
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxlists.php'),
+), '', true, true);
+unset($properties);
+
+$snippets[2]= $modx->newObject('modSnippet');
+$snippets[2]->fromArray(array(
+    'id'          => 2,
+    'name'        => 'PinXOptions',
+    'description' => 'Displays Options for form.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxoptions.php'),
+), '', true, true);
+unset($properties);
+
+$snippets[3]= $modx->newObject('modSnippet');
+$snippets[3]->fromArray(array(
+    'id'          => 3,
+    'name'        => 'PinXProcess',
+    'description' => 'process ajax form.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxprocess.php'),
+), '', true, true);
+unset($properties);
+
+$snippets[4]= $modx->newObject('modSnippet');
+$snippets[4]->fromArray(array(
+    'id'          => 4,
+    'name'        => 'PinXDelete',
+    'description' => 'process ajax form.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinxdelete.php'),
+), '', true, true);
+unset($properties);
+
+$snippets[5]= $modx->newObject('modSnippet');
+$snippets[5]->fromArray(array(
+    'id'          => 5,
+    'name'        => 'PinXIsPinned',
+    'description' => '',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.pinpinned.php'),
 ), '', true, true);
 unset($properties);
 
