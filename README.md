@@ -1,6 +1,11 @@
 ## PinX
 
-> Pinterest for users on your MODX Site
+Pinterest for users on your MODX Site
+
+
+[Checkout the YouTube videos](https://youtu.be/cgI2H0dGXtM)
+
+---
 
 ## Templates
 
@@ -48,13 +53,13 @@ To output your Users Sets, just place following snippet call in desired location
 
 **You will need to pair this with the Login Extra**
 
-    [[PinX? &userid=`1`]]
+    [[PinX]]
 
 *Calling it like this will output all sets and their images.*
 
 A more specific call would be like this:
 
-    [[PinX? &userid=`1` &listid=`1`]]
+    [[PinX? &listid=`1`]]
 
 ## Options
 
@@ -79,7 +84,6 @@ There are more options available to modify the call to your needs:
 A more complex call would look like this:
 
     [[PinX?
-      &userid=`1`
       &listid=`1`
       &tpl=`pinx-img-tpl`
       &sortBy=`rank`
